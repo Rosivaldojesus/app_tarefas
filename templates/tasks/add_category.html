@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %} Adicionar Categoria {{ block.super }}  {% endblock %}
+
+{% block body %}
+
+    <h1>Categoria</h1>
+    <hr>
+
+    {% include 'partials/messages.html' %}
+
+    <form action="." method="POST">
+    {% csrf_token %}
+
+    <div class="row g-3">
+        <div class="col">
+            <label for="id_name">Nome:</label>
+            {{ form.name|add_class:"form-control"|attr:"autofocus" }}
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col">
+            <label for="id_description">Descrição:</label>
+            {{ form.description|add_class:"form-control" }}
+        </div>
+    </div>
+
+
+
+        <button type="submit"  class="btn btn-primary">Salvar</button>
+    </form>
+
+{% endblock %}

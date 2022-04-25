@@ -1,0 +1,59 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Tarefas
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'tasks:add_task'%}">Adicionar</a></li>
+              <li><a class="dropdown-item" href="{% url 'tasks:tasks_list' %}">Lista</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categoria
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'tasks:add_category'%}">Adicionar</a></li>
+              <li><a class="dropdown-item" href="{% url 'tasks:list_categories'%}">Lista</a></li>
+            </ul>
+          </li>
+
+          {% if user.is_authenticated %}
+
+          <li class="nav-item">
+            {% if user.profile.photo %}
+            <img src="{{ user.profile.photo.url }}" alt="Foto" class="rounded-circle" width="40" height="40">
+            {% else %}
+            <img src="{% static 'img/user.png '%}" alt="Foto" class="rounded-circle" width="40" height="40">
+            {% endif %}
+          </li>
+
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ user.get_full_name|default:user.username }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'accounts:list_user_profile'%}">Perfil</a></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:user_change_password'%}">Trocar Senha</a></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:user_logout'%}">Sair</a></li>
+            </ul>
+          </li>
+          {% endif %}
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>

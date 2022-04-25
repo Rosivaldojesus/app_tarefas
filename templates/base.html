@@ -1,0 +1,111 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+    <!--
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    -->
+
+
+    <!-- Select -->
+    <script src="{% static 'css/select2.min.css' %}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
+
+
+    <title>{% block title %}| Tarefas {% endblock %}</title>
+  </head>
+  <body>
+
+    {% include 'header.html' %}
+    
+    <div class="container">
+
+    
+      {% block body %}
+
+      {% endblock %}
+
+    </div>
+
+
+    <!-- OBS. Para funcionamento do modal -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+
+    <!-- Jquery-->
+    <link href="{% static 'jquery/jquery-3.6.0.min.js' %}" rel="stylesheet">
+
+
+    <!-- Mask-->
+    <link href="{% static 'js/jquery.mask.js' %}" rel="stylesheet">
+    <link href="{% static 'js/mask.js' %}" rel="stylesheet">
+   
+
+
+
+
+    
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+    <!-- Select -->
+    <script src="{% static 'js/select2.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>          
+    
+
+    <!-- MOdal -->
+    <script>
+      $(document).on('click','.confirm-delete', function () {
+        $('#confirmDeleteModal').attr('caller-id', $(this).attr('id'));
+      });
+
+
+      $(document).on('click', '#confirmDeleteModalButtonModal', function(){
+        var caller = $('#confirmDeleteModalButtonModal').closest('.modal').attr('caller-id');
+        window.location = $('#'.concat(caller)).attr('href');
+      });
+
+      /*DatePick*/
+      $( function() {
+        $( "#id_end_date" ).datepicker({
+          dateFormat: "dd/mm-yy",
+          dayNamesMin: [ "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab" ]
+        });
+      } );
+
+      // In your Javascript (external .js resource or <script> tag)
+      $(document).ready(function() {
+          $('#id_category').select2({
+            tags: true
+          });
+      });
+
+    
+    </script>
+
+
+   
+    
+
+  </body>
+</html>

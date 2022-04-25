@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %} Adicionar Tarefa {{ block.super }}  {% endblock %}
+
+{% block body %}
+
+    <h1>Tarefa</h1>
+    <hr>
+
+    {% include 'partials/messages.html' %}
+
+    <form action="." method="POST">
+    {% csrf_token %}
+
+    <div class="row g-3">
+        <div class="col">
+            <label for="id_name">Nome:</label>
+            {{ form.name|add_class:"form-control"|attr:"autofocus" }}
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col">
+            <label for="id_description">Descrição:</label>
+            {{ form.description|add_class:"form-control" }}
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col">
+            <label for="id_description">Data final</label>
+            {{ form.end_date|add_class:"form-control" }}
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col">
+            <label for="id_description">Prioridade</label>
+            {{ form.prioritary|add_class:"form-control" }}
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col">
+            <label for="id_description">Categoria</label>
+            {{ form.category|add_class:"form-control" }}
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col">
+            <label for="id_description">Status</label>
+            {{ form.status|add_class:"form-control" }}
+        </div>
+    </div>
+
+
+
+
+        <button type="submit"  class="btn btn-primary">Salvar</button>
+    </form>
+
+{% endblock %}

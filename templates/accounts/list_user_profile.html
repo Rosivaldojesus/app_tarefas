@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% load static %}
+
+{% block title %}
+    Meu Perfil {{ block.super }}  
+{% endblock %}
+
+
+{% block body %}
+<h1>Meu Perfil</h1>
+
+    {% if profile %}
+        <div class="row">
+            <div class="col-sm-3">
+                <img class="mr-3 rounded-circle" width="200" height="200" src="{{ profile.photo.url }}" alt="Generic placeholder image"> 
+            </div>
+            <div class="col-sm-9">
+                <h5 class="mt-0">{{ profile.user.get_full_name }}</h5>
+                <p>Celular: {{ profile.cell_phone }}</p>
+                <p>E-mail: {{ profile.email }}</p>
+            </div>
+        </div>
+        
+    {% else %}
+        <h2>Você ainda não possui perfil </h2>
+    {% endif %}
+
+        <div class="mt-4">
+            <a href="{% url 'accounts:add_user_profile'%}" class="btn btn-primary">Alterar perfil</a>
+        </div>
+
+{% endblock %}
