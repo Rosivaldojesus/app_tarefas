@@ -2,12 +2,13 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, render
 
 from .models import UserProfile
-from .forms import UserForm, UserProfileForm
+from .forms import UserForm, UserProfileForm, UserChangeInformationForm
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -83,16 +84,44 @@ def add_user_profile(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='/contas/login/')
 def list_user_profile(request):
     template_name ='accounts/list_user_profile.html'
-    
     try:
         profile = UserProfile.objects.get(user=request.user)
     except UserProfile.DoesNotExist:
         profile = None
-
     context = {
         'profile': profile
-        
     }
     return render(request, template_name, context )
+
+
+@login_required(login_url='/contas/login/')
+def change_user_profile(request, username):
+    template_name ='accounts/add_user_profile.html'
+    context = {}
+    profile = UserProfile.objects.get(user__username=username)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Perfil atualizado com sucesso.")
+    form = UserProfileForm(instance=profile)
+    context['form'] = form
+    return render(request, template_name, context)
+
+
+@login_required(login_url='/contas/login/')
+def change_user_information(request, username):
+    template_name = 'accounts/change_user_information.html'
+    context = {}
+    user = User.objects.get(username=username)
+    if request.method == 'POST':
+        form = UserChangeInformationForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Informações atualizdas com sucesso.")
+    form = UserChangeInformationForm(instance=user)
+    context['form'] = form
+    return render(request, template_name, context)

@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="/">Tarefas</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -43,16 +43,18 @@
               {{ user.get_full_name|default:user.username }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'accounts:add_user'%}">Novo Usuário</a></li>
               <li><a class="dropdown-item" href="{% url 'accounts:list_user_profile'%}">Perfil</a></li>
               <li><a class="dropdown-item" href="{% url 'accounts:user_change_password'%}">Trocar Senha</a></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:change_user_information' user.username%}">Informações</a></li>
               <li><a class="dropdown-item" href="{% url 'accounts:user_logout'%}">Sair</a></li>
             </ul>
           </li>
           {% endif %}
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <form class="d-flex" action="{% url 'core:search_tasks' %}">
+          <input class="form-control me-2" name="query" type="search" placeholder="Pesquisar" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
         </form>
       </div>
     </div>

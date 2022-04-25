@@ -5,7 +5,7 @@
 
 {% block body %}
 
-    <h1>Lista de tarefas </h1>
+    <h1>Resultado </h1>
 
 
     <table class="table">
@@ -14,6 +14,7 @@
             <th scope="col">Tarefa</th>
             <th scope="col">Descrição</th>
             <th scope="col">Data Final</th>
+            <th scope="col">Ação</th>
           </tr>
         </thead>
         <tbody>
@@ -23,6 +24,7 @@
             <th>{{ task.name }}</th>
             <td>{{ task.description }}</td>
             <td>{{ task.end_date }}</td>
+            <td>Editar</td>
           </tr>
           {% endfor %}
         </tbody>
