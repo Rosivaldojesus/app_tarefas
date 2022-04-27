@@ -15,8 +15,8 @@ class Category(models.Model):
         verbose_name_plural ='categorias'
         ordering = ['id']
 
-        def __str__(self) -> str:
-            return self.name
+    def __str__(self):
+        return self.name
 
 class Task(models.Model):
     PRIORITY_CHOICES = (
@@ -44,4 +44,4 @@ class Task(models.Model):
 
 
     def __str__(self):
-        return "{}".format(self.name)
+        return self.name
